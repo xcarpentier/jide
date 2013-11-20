@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-15" ?>
+ <project name="projetIDE" default="all" basedir=".">
+  <property name="src"       value="src"/>
+  <property name="build"     value="build"/>
+  <property name="lib"       value="lib"/>
+  <property name="resources" value="resources"/>
+  <property name="dist" value="dist"/>
+  <property name="doc" value="doc"/>
+  
+  
+  <target name="all" depends="compile" description="Builds the IDE project">
+    <echo>auteurs : Saint-Maxin Steeve et Carpentier Xavier</echo>
+  </target>
+  
+  <target name="compile" description="Builds the IDE project">
+    <echo>Construction du projet IDE</echo>
+    <javac srcdir="${src}" destdir="${build}" />
+  </target>
+
+   <target name="run" description="Launch the main application">
+     <echo>Execution du projet IDE</echo>
+     <echo>auteurs : Saint-Maxin Steeve et Carpentier Xavier</echo>
+     <java dir="${build}" classname="projetIDE.IDE" fork="true"/>
+   </target>
+ 
+    <target name="doc" >
+     <mkdir dir="${doc}"/>
+       <javadoc sourcepath="${src}" destdir="${doc}" packagenames="projetIDE.*"  Author="Saint-Maxin Steeve et Carpentier Xavier"/>
+       </target> 
+   
+    <target name="dist" depends="compile">
+     <mkdir dir="${dist}/lib"/>
+     <jar jarfile="${dist}/lib/IDE.jar" basedir="build" index="true" manifest="META-INF/MANIFEST.MF" />
+     
+    </target>
+    
+   <target name="clean" description="Clean all generated files and directories ...">
+     <delete dir="${build}/projetIDE"/> 
+     <delete dir="${dist}/lib"/> 
+     <delete dir="${doc}"/> 
+   </target>
+   
+   
+</project>
+
